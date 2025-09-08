@@ -1,6 +1,6 @@
-# Wedding Card GitLab Project
+# CI CD Test environment with docker and kubernetes - GitLab Project
 
-This is a GitLab project for managing wedding card related content and development.
+This is a GitLab project for managing Danny's testing environment related content and development with gitlab.
 
 ## TL;DR - What We Accomplished
 
