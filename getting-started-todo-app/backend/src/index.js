@@ -1,3 +1,6 @@
+// Initialize Datadog tracing first
+const tracer = require('dd-trace').init();
+
 const express = require('express');
 const app = express();
 const db = require('./persistence');

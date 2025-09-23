@@ -74,6 +74,14 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: secret
       MYSQL_DB: todos
+      # Datadog APM Configuration
+      DD_AGENT_HOST: datadog-agent
+      DD_TRACE_AGENT_PORT: 8126
+      DD_SERVICE: backend
+      DD_ENV: development
+      DD_VERSION: 1.0.0
+      DD_LOGS_INJECTION: true
+      DD_RUNTIME_METRICS_ENABLED: true
     depends_on:
       mysql:
         condition: service_healthy
@@ -172,6 +180,37 @@ services:
     labels:
       traefik.http.routers.phpmyadmin.rule: Host(`db.localhost`)
       traefik.http.services.phpmyadmin.loadbalancer.server.port: 80
+
+  ###################################################
+  # Service: datadog-agent
+  #
+  # This service provides Datadog APM (Application Performance Monitoring)
+  # for the todo application. It collects traces, metrics, and logs from
+  # the backend service and sends them to Datadog.
+  #
+  # The agent runs in the same network as the application services to
+  # collect APM data from the backend service.
+  ###################################################
+  datadog-agent:
+    image: datadog/agent:latest
+    environment:
+      DD_API_KEY: ${DD_API_KEY}
+      DD_SITE: datadoghq.com
+      DD_APM_ENABLED: true
+      DD_APM_NON_LOCAL_TRAFFIC: true
+      DD_LOGS_ENABLED: true
+      DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL: true
+      DD_PROCESS_AGENT_ENABLED: true
+      DD_DOCKER_LABELS_AS_TAGS: '{"*":"%%label%%"}'
+      DD_DOCKER_ENV_AS_TAGS: '{"*":"%%env%%"}'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    ports:
+      - "8126:8126"  # APM trace port
+    restart: unless-stopped
 
 ###################################################
 # Volumes
