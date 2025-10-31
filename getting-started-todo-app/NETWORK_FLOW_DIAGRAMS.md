@@ -23,6 +23,11 @@ The Todo App runs in Docker containers on an EC2 instance with the following arc
 
 ---
 
+### Notes!
+If you just deploy a single instance and it has a public IP, you are using the free NAT functionality of the IGW. You only pay for a NAT Gateway when you intentionally set one up to support instances in a private subnet.
+<img width="1579" height="522" alt="2025-10-31_17-22-51" src="https://github.com/user-attachments/assets/def11271-37c2-4689-8881-131b032de01f" />
+
+
 ## Case 1: External Access via Public IP (Laptop → EC2)
 
 **URL**: `http://13.125.18.51:8000/` or `http://ec2-13-125-18-51.ap-northeast-2.compute.amazonaws.com:8000/`
