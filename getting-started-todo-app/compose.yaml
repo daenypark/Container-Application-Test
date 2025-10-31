@@ -203,11 +203,25 @@ services:
       DD_PROCESS_AGENT_ENABLED: true
       DD_DOCKER_LABELS_AS_TAGS: '{"*":"%%label%%"}'
       DD_DOCKER_ENV_AS_TAGS: '{"*":"%%env%%"}'
+      DD_SYSTEM_PROBE_NETWORK_ENABLED: true
     volumes:
+      - /sys/kernel/debug:/sys/kernel/debug
+
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /proc/:/host/proc/:ro
       - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    cap_add:
+      - SYS_ADMIN
+      - SYS_RESOURCE
+      - SYS_PTRACE
+      - NET_ADMIN
+      - NET_BROADCAST
+      - NET_RAW
+      - IPC_LOCK
+      - CHOWN
+    security_opt:
+      - apparmor:unconfined
     ports:
       - "8126:8126"  # APM trace port
     restart: unless-stopped
