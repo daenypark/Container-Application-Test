@@ -37,7 +37,7 @@ If you just deploy a single instance and it has a public IP, you are using the f
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                              YOUR LAPTOP                                        │
-│  Browser/curl: http://13.125.18.51:8000/                                       │
+│  Browser/curl: http://13.125.18.51:8000/                                        │
 │  Your IP: [Your Laptop IP]                                                      │
 └─────────────────────────────────────────────────────────────────────────────────┘
                                         │
@@ -47,8 +47,8 @@ If you just deploy a single instance and it has a public IP, you are using the f
                                         ▼
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                                INTERNET                                         │
-│  DNS Query: ec2-13-125-18-51.ap-northeast-2.compute.amazonaws.com              │
-│  Response: 13.125.18.51                                                        │
+│  DNS Query: ec2-13-125-18-51.ap-northeast-2.compute.amazonaws.com               │
+│  Response: 13.125.18.51                                                         │
 └─────────────────────────────────────────────────────────────────────────────────┘
                                         │
                                         │ 2. HTTP Request
@@ -57,8 +57,8 @@ If you just deploy a single instance and it has a public IP, you are using the f
                                         ▼
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                              EC2 INSTANCE                                       │
-│  Public IP: 13.125.18.51                                                       │
-│  Private IP: 172.31.5.117                                                      │
+│  Public IP: 13.125.18.51                                                        │
+│  Private IP: 172.31.5.117                                                       │
 │  Interface: ens5                                                                │
 └─────────────────────────────────────────────────────────────────────────────────┘
                                         │
@@ -69,7 +69,7 @@ If you just deploy a single instance and it has a public IP, you are using the f
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                            DOCKER PORT MAPPING                                  │
 │  Host Port: 8000 → Container Port: 80                                           │
-│  Process: docker-proxy (PID: 1234500)                                          │
+│  Process: docker-proxy (PID: 1234500)                                           │
 └─────────────────────────────────────────────────────────────────────────────────┘
                                         │
                                         │ 4. Docker Bridge Network
@@ -91,10 +91,10 @@ If you just deploy a single instance and it has a public IP, you are using the f
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                              ROUTING DECISION                                   │
 │                                                                                 │
-│  IF Host = localhost OR ec2-13-125-18-51.ap-northeast-2.compute.amazonaws.com  │
-│  AND Path = / (not /api/*)                                                     │
+│  IF Host = localhost OR ec2-13-125-18-51.ap-northeast-2.compute.amazonaws.com   │
+│  AND Path = / (not /api/*)                                                      │
 │                                                                                 │
-│  → Route to CLIENT (React App)                                                 │
+│  → Route to CLIENT (React App)                                                  │
 └─────────────────────────────────────────────────────────────────────────────────┘
                                         │
                                         │ 6. Forward to Client
@@ -113,8 +113,8 @@ If you just deploy a single instance and it has a public IP, you are using the f
                                         ▼
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                              RESPONSE FLOW                                      │
-│  Client → Traefik → Docker → EC2 → Internet → Your Laptop                      │
-│  Content: Todo App HTML Page                                                   │
+│  Client → Traefik → Docker → EC2 → Internet → Your Laptop                       │
+│  Content: Todo App HTML Page                                                    │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -136,7 +136,7 @@ If you just deploy a single instance and it has a public IP, you are using the f
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                              EC2 INSTANCE                                       │
 │  Command: curl http://localhost:8000/                                           │
-│  Process: curl (running on host)                                               │
+│  Process: curl (running on host)                                                │
 └─────────────────────────────────────────────────────────────────────────────────┘
                                         │
                                         │ 1. Localhost Resolution
@@ -175,10 +175,10 @@ If you just deploy a single instance and it has a public IP, you are using the f
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                              ROUTING DECISION                                   │
 │                                                                                 │
-│  IF Host = localhost OR ec2-13-125-18-51.ap-northeast-2.compute.amazonaws.com  │
-│  AND Path = / (not /api/*)                                                     │
+│  IF Host = localhost OR ec2-13-125-18-51.ap-northeast-2.compute.amazonaws.com   │
+│  AND Path = / (not /api/*)                                                      │
 │                                                                                 │
-│  → Route to CLIENT (React App)                                                 │
+│  → Route to CLIENT (React App)                                                  │
 └─────────────────────────────────────────────────────────────────────────────────┘
                                         │
                                         │ 5. Forward to Client
@@ -197,8 +197,8 @@ If you just deploy a single instance and it has a public IP, you are using the f
                                         ▼
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                              RESPONSE FLOW                                      │
-│  Client → Traefik → Docker → Loopback → curl                                   │
-│  Content: Todo App HTML Page                                                   │
+│  Client → Traefik → Docker → Loopback → curl                                    │
+│  Content: Todo App HTML Page                                                    │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -220,7 +220,7 @@ If you just deploy a single instance and it has a public IP, you are using the f
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                              EC2 INSTANCE                                       │
 │  Command: curl http://ec2-13-125-18-51.ap-northeast-2.compute.amazonaws.com:8000│
-│  Process: curl (running on host)                                               │
+│  Process: curl (running on host)                                                │
 └─────────────────────────────────────────────────────────────────────────────────┘
                                         │
                                         │ 1. DNS Resolution
@@ -229,8 +229,8 @@ If you just deploy a single instance and it has a public IP, you are using the f
                                         ▼
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                            AWS PRIVATE DNS                                      │
-│  Query: ec2-13-125-18-51.ap-northeast-2.compute.amazonaws.com                  │
-│  Response: 172.31.5.117 (private IP)                                           │
+│  Query: ec2-13-125-18-51.ap-northeast-2.compute.amazonaws.com                   │
+│  Response: 172.31.5.117 (private IP)                                            │
 └─────────────────────────────────────────────────────────────────────────────────┘
                                         │
                                         │ 2. HTTP Request
@@ -240,7 +240,7 @@ If you just deploy a single instance and it has a public IP, you are using the f
                                         ▼
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                              EC2 HOST NETWORK                                   │
-│  Private IP: 172.31.5.117                                                      │
+│  Private IP: 172.31.5.117                                                       │
 │  Interface: ens5                                                                │
 │  Port: 8000                                                                     │
 └─────────────────────────────────────────────────────────────────────────────────┘
@@ -272,10 +272,10 @@ If you just deploy a single instance and it has a public IP, you are using the f
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                              ROUTING DECISION                                   │
 │                                                                                 │
-│  IF Host = localhost OR ec2-13-125-18-51.ap-northeast-2.compute.amazonaws.com  │
-│  AND Path = / (not /api/*)                                                     │
+│  IF Host = localhost OR ec2-13-125-18-51.ap-northeast-2.compute.amazonaws.com   │
+│  AND Path = / (not /api/*)                                                      │
 │                                                                                 │
-│  → Route to CLIENT (React App)                                                 │
+│  → Route to CLIENT (React App)                                                  │
 └─────────────────────────────────────────────────────────────────────────────────┘
                                         │
                                         │ 6. Forward to Client
@@ -294,8 +294,8 @@ If you just deploy a single instance and it has a public IP, you are using the f
                                         ▼
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                              RESPONSE FLOW                                      │
-│  Client → Traefik → Docker → Host Network → curl                               │
-│  Content: Todo App HTML Page                                                   │
+│  Client → Traefik → Docker → Host Network → curl                                │
+│  Content: Todo App HTML Page                                                    │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -317,7 +317,7 @@ If you just deploy a single instance and it has a public IP, you are using the f
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                              YOUR LAPTOP                                        │
 │  Browser: http://localhost:8000                                                 │
-│  User: danny.park@COMP-L63Q5K7CH7                                              │
+│  User: danny.park@COMP-L63Q5K7CH7                                               │
 └─────────────────────────────────────────────────────────────────────────────────┘
                                         │
                                         │ 1. Localhost Connection
@@ -325,10 +325,10 @@ If you just deploy a single instance and it has a public IP, you are using the f
                                         ▼
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                            CURSOR REMOTE SSH                                    │
-│  Process: Cursor Helper (Plugin)                                               │
+│  Process: Cursor Helper (Plugin)                                                │
 │  PID: 56264                                                                     │
-│  Port: 8000 (irdmi)                                                            │
-│  Auto Port Forwarding: 8000 → 8000                                             │
+│  Port: 8000 (irdmi)                                                             │
+│  Auto Port Forwarding: 8000 → 8000                                              │
 └─────────────────────────────────────────────────────────────────────────────────┘
                                         │
                                         │ 2. SSH Connection
@@ -337,9 +337,9 @@ If you just deploy a single instance and it has a public IP, you are using the f
                                         ▼
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                              EC2 INSTANCE                                       │
-│  Public IP: 13.125.18.51                                                       │
-│  Private IP: 172.31.5.117                                                      │
-│  Connection: my-ec2 (SSH config)                                               │
+│  Public IP: 13.125.18.51                                                        │
+│  Private IP: 172.31.5.117                                                       │
+│  Connection: my-ec2 (SSH config)                                                │
 └─────────────────────────────────────────────────────────────────────────────────┘
                                         │
                                         │ 3. Port Forwarding
@@ -370,10 +370,10 @@ If you just deploy a single instance and it has a public IP, you are using the f
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                              ROUTING DECISION                                   │
 │                                                                                 │
-│  IF Host = localhost OR ec2-13-125-18-51.ap-northeast-2.compute.amazonaws.com  │
-│  AND Path = / (not /api/*)                                                     │
+│  IF Host = localhost OR ec2-13-125-18-51.ap-northeast-2.compute.amazonaws.com   │
+│  AND Path = / (not /api/*)                                                      │
 │                                                                                 │
-│  → Route to CLIENT (React App)                                                 │
+│  → Route to CLIENT (React App)                                                  │
 └─────────────────────────────────────────────────────────────────────────────────┘
                                         │
                                         │ 6. Forward to Client
